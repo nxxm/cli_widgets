@@ -5,6 +5,8 @@ For the moment the following is supported :
 
 ## [`cli_widgets::spin_loader`](./cli_widgets/spin_loader.hpp)
 
+![`cli_widgets::spin_loader`](./spin_loader.gif)
+
 ```
 cli_widgets::spin_loader loader(std::cout);
 loader.launch();
