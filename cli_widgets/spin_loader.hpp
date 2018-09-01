@@ -8,6 +8,7 @@
 #include <locale>
 #include <string>
 
+#include <boost/predef.h>
 #include <termcolor/termcolor.hpp>
 
 namespace cli_widgets {
@@ -47,7 +48,12 @@ namespace cli_widgets {
     std::size_t size = 10;
 
     //! configurable start icon
-    std::wstring start_icon = L"⏳ "; 
+    std::wstring start_icon = 
+      #if BOOST_OS_WINDOWS 
+        L"- ";
+      #else
+        L"⏳ ";
+      #endif
 
     //! configurable loader boundary
     std::string begin = "{";
@@ -56,7 +62,12 @@ namespace cli_widgets {
     std::string end = "}";
 
     //! action being run, this can be a message too
-    std::wstring action = L"●●●";
+    std::wstring action = 
+      #if BOOST_OS_WINDOWS 
+        L"...";
+      #else
+        L"●●●";
+      #endif
 
     //! step_speed of the animation
     std::chrono::nanoseconds step_speed{80000000};
