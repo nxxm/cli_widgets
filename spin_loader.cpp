@@ -9,19 +9,19 @@ int main(int argc, char** argv) {
   cli_widgets::spin_loader loader(std::cout);
   loader.launch();
     some_long_running_computation();
-  loader.stop("error.", true);
+  loader.stop();//("error.", true);
 
 
-  // Configurable
-  loader.size = 30;
-  loader.begin = "<[";
-  loader.end = "]>";
-  loader.action = L"<=== please wait ===>";
-  loader.step_speed = 
-    std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::milliseconds{30});
-  loader.launch();
-    some_long_running_computation();
-  loader.stop();
+//  // Configurable
+//  loader.size = 30;
+//  loader.begin = "<[";
+//  loader.end = "]>";
+//  loader.action = L"<=== please wait ===>";
+//  loader.step_speed = 
+//    std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::milliseconds{30});
+//  loader.launch();
+//    some_long_running_computation();
+//  loader.stop();
 
   return 0;
 }
