@@ -73,7 +73,7 @@ namespace cli_widgets {
     std::chrono::nanoseconds step_speed{80000000};
 
     std::ostream& _out;
-    volatile bool _stop = false;
+    volatile bool _stop = true;
     std::thread _animating_thread;
 
     /**
