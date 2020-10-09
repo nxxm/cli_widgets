@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 
 #include <ostream>
 #include <algorithm>
@@ -14,7 +14,7 @@
 namespace cli_widgets {
 
   // convert wstring to UTF-8 string
-  std::string wstring_to_utf8 (const std::wstring& str) {
+  inline std::string wstring_to_utf8 (const std::wstring& str) {
     std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
     return myconv.to_bytes(str);
   }
@@ -25,22 +25,22 @@ namespace cli_widgets {
    *        action is in progress that we don't know the end
    *        for.
    *        It shows an animated : `⏳ {   ●●●       }`
-   *        
-   *        Usage is simple : 
+   *
+   *        Usage is simple :
    *
    *        ```cpp
    *        cli_widgets::spin_loader loader(std::cout);
    *        loader.launch();
-   *        
-   *        bool error = some_long_running_computation(); 
    *
-   *        if (error) 
+   *        bool error = some_long_running_computation();
+   *
+   *        if (error)
    *          loader.stop("error : it failed", true);
-   *        else 
+   *        else
    *          loader.stop("success");
    *
    *        ```
-   * 
+   *
    */
   struct spin_loader {
 
@@ -48,8 +48,8 @@ namespace cli_widgets {
     std::size_t size = 10;
 
     //! configurable start icon
-    std::wstring start_icon = 
-      #if BOOST_OS_WINDOWS 
+    std::wstring start_icon =
+      #if BOOST_OS_WINDOWS
         L"- ";
       #else
         L"⏳ ";
@@ -57,13 +57,13 @@ namespace cli_widgets {
 
     //! configurable loader boundary
     std::string begin = "{";
-    
+
     //! configurable loader boundary
     std::string end = "}";
 
     //! action being run, this can be a message too
-    std::wstring action = 
-      #if BOOST_OS_WINDOWS 
+    std::wstring action =
+      #if BOOST_OS_WINDOWS
         L"...";
       #else
         L"●●●";
@@ -99,14 +99,14 @@ namespace cli_widgets {
 
     /**
      * \brief launches the animated spinloader.
-     */ 
+     */
     void launch() {
       _stop = false;
       _animating_thread = std::thread([this]() {
         std::wstring action_expanded = action + std::wstring(size, ' ');
 
         for(;!_stop;) {
-          
+
           for (size_t i=0; ((i < size) && !_stop); ++i) {
             _out << "\r" << wstring_to_utf8(start_icon) << termcolor::green << begin << termcolor::reset ;
 
@@ -131,7 +131,7 @@ namespace cli_widgets {
      * \brief stops the animation.
      * \param stop_message by default `done.`
      * \param is_error green when false, red otherwise.
-     */ 
+     */
     void stop(const std::string& stop_message = "done.", bool is_error = false) {
 
       try {
@@ -151,6 +151,6 @@ namespace cli_widgets {
 
     }
 
-    
+
   };
 }
