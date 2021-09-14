@@ -37,7 +37,7 @@ namespace cli_widgets {
   }
 
   struct stdin_hide_guard {
-    stdin_hide_guard() { set_stdin_echo(true); }
-    ~stdin_hide_guard() { set_stdin_echo(false); }
+    stdin_hide_guard() { set_stdin_echo(false); }
+    ~stdin_hide_guard() { set_stdin_echo(true); }
   };
 }
