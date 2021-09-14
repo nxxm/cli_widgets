@@ -35,9 +35,9 @@ namespace cli_widgets {
     (void)tcsetattr(STDIN_FILENO, TCSANOW, &tty);
 #endif
   }
-  
+
   struct stdin_hide_guard {
-    stdin_hide_guard(bool enable) { set_stdin_echo(enable); }
+    stdin_hide_guard() { set_stdin_echo(true); }
     ~stdin_hide_guard() { set_stdin_echo(false); }
   };
 }
