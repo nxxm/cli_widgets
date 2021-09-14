@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 
   std::cout << termcolor::yellow << "Just a simple symblo spinner: " << termcolor::reset << std::endl;
 
-  const std::list<std::string> symbols { "v", "<", "^", ">" };
+  const std::vector<std::string> symbols { "v", "<", "^", ">" };
   cli_widgets::symbol_spinner spinner(symbols);
 
   for(int i = 50; i > 0; i--) {
