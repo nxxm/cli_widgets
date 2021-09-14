@@ -36,6 +36,13 @@ namespace cli_widgets {
 #endif
   }
 
+
+  /**
+   * \brief stdin_hide_guard makes sure that the std::cin is not displayed in the console 
+   * This can be useful in some cases like typing a password
+   * At the end of the scope std::cin returns to its original state 
+   */
+  
   struct stdin_hide_guard {
     stdin_hide_guard() { set_stdin_echo(false); }
     ~stdin_hide_guard() { set_stdin_echo(true); }
