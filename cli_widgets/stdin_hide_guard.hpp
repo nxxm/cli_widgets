@@ -17,9 +17,9 @@ namespace cli_widgets {
     GetConsoleMode(hStdin, &mode);
 
     if (!enable) {
-      mode &= ~ENABLE_ECHO_INPUT;
-    } else {
       mode |= ENABLE_ECHO_INPUT;
+    } else {
+      mode &= ~ENABLE_ECHO_INPUT;
     }
 
     SetConsoleMode(hStdin, mode);
@@ -27,9 +27,10 @@ namespace cli_widgets {
     struct termios tty;
     tcgetattr(STDIN_FILENO, &tty);
     if (!enable) {
-      tty.c_lflag &= ~ECHO;
-    } else {
       tty.c_lflag |= ECHO;
+    } else {
+      tty.c_lflag &= ~ECHO;
+
     }
 
     (void)tcsetattr(STDIN_FILENO, TCSANOW, &tty);
@@ -44,7 +45,7 @@ namespace cli_widgets {
    */
   
   struct stdin_hide_guard {
-    stdin_hide_guard() { set_stdin_echo(false); }
-    ~stdin_hide_guard() { set_stdin_echo(true); }
+    stdin_hide_guard(bool enable = true) { set_stdin_echo(enable); }
+    ~stdin_hide_guard() { set_stdin_echo(false); }
   };
 }
