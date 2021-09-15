@@ -35,10 +35,10 @@ namespace cli_widgets {
      * 
      * For reduced range look at the other constructor overloads
      */
-    symbol_cycler(const std::vector<std::string> &list) 
+    symbol_cycler(const std::vector<std::string> &vector) 
       : std::vector<std::string>::const_iterator(list.begin())
-      , begin(list.begin())
-      , end(list.end()) {}   
+      , begin(vector.begin())
+      , end(vector.end()) {}   
 
     symbol_cycler &operator++(void) {
       std::vector<std::string>::const_iterator::operator++();

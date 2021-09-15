@@ -21,7 +21,7 @@ See [spin\_loader.cpp](./spin_loader.cpp) for more example.
 The *no-need-to-worry-about-collection-boundaries-circular-iterrator-string-symbol-spinner*:
 
 ```cpp
-const std::list<std::string> symbols { "v", "<", "^", ">" };
+const std::vector<std::string> symbols { "v", "<", "^", ">" };
 cli_widgets::symbol_cycler spinner(symbols);
 
 for(int i = 50; i > 0; i--) {
