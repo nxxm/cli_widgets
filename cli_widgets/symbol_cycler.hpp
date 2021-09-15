@@ -11,7 +11,7 @@ namespace cli_widgets {
    * \note to future self and anyone else: don't do silly things which could make both passed iterators 
    * swap places like sorting the list etc which likely could cause havoc. Should be fine otherwise _/\Ö/\_
    */
-  class symbol_spinner : public std::vector<std::string>::const_iterator  {
+  class symbol_cycler : public std::vector<std::string>::const_iterator  {
 
     std::vector<std::string>::const_iterator  begin, end;
 
@@ -24,7 +24,7 @@ namespace cli_widgets {
      * Each iterator incrementation (or next() call) will get you access to the next symbol of
      * your favourite ASCII spinner.
      */
-    symbol_spinner(std::vector<std::string>::const_iterator b, std::vector<std::string>::const_iterator e) 
+    symbol_cycler(std::vector<std::string>::const_iterator b, std::vector<std::string>::const_iterator e) 
       : std::vector<std::string>::const_iterator(b)
       , begin(b)
       , end(e) {}
@@ -35,19 +35,19 @@ namespace cli_widgets {
      * 
      * For reduced range look at the other constructor overloads
      */
-    symbol_spinner(const std::vector<std::string> &list) 
+    symbol_cycler(const std::vector<std::string> &list) 
       : std::vector<std::string>::const_iterator(list.begin())
       , begin(list.begin())
       , end(list.end()) {}   
 
-    symbol_spinner &operator++(void) {
+    symbol_cycler &operator++(void) {
       std::vector<std::string>::const_iterator::operator++();
       if (*this == end)
         std::vector<std::string>::const_iterator::operator=(begin);
       return *this;
     }
 
-    const symbol_spinner operator++(int) {
+    const symbol_cycler operator++(int) {
       const auto oldValue = *this;
       this->operator++();
       return oldValue;
@@ -57,8 +57,8 @@ namespace cli_widgets {
         return *(this->operator++());
     }
 
-    symbol_spinner &operator--(void) = delete;
-    const symbol_spinner operator--(int) = delete;
+    symbol_cycler &operator--(void) = delete;
+    const symbol_cycler operator--(int) = delete;
   };
 }
 

@@ -1,19 +1,19 @@
 #include <iostream>
-#include <vector>
+#include <list>
 #include <thread>
 #include <chrono>
 #include <cli_widgets/spin_loader.hpp>
-#include <cli_widgets/symbol_spinner.hpp>
+#include <cli_widgets/symbol_cycler.hpp>
 #include <termcolor/termcolor.hpp>
 
 const std::chrono::nanoseconds step_slow{100000000};
 
 int main(int argc, char** argv) {
-
-  std::cout << termcolor::yellow << "Just a simple symblo spinner: " << termcolor::reset << std::endl;
+ 
+  std::cout << termcolor::yellow << "Just a simple symblo cycler: " << termcolor::reset << std::endl;
 
   const std::vector<std::string> symbols { "v", "<", "^", ">" };
-  cli_widgets::symbol_spinner spinner(symbols);
+  cli_widgets::symbol_cycler spinner(symbols);
 
   for(int i = 50; i > 0; i--) {
     std::cout << "\r" << spinner.next() << " <- Hey! Look at me =D" << std::flush;
@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
   std::cout << std::endl;
   std::cout << termcolor::yellow << "Same game using one of the inbuilt symbol collections: " << termcolor::reset << std::endl;
 
-  cli_widgets::symbol_spinner spinner_inbuilt(cli_widgets::spinner_symbols::symbols_braille_inverted);
+  cli_widgets::symbol_cycler spinner_inbuilt(cli_widgets::spinner_symbols::symbols_braille_inverted);
 
   for(int i = 50; i > 0; i--) {
     std::cout << "\r" << termcolor::bright_red << spinner_inbuilt.next() << termcolor::reset;
@@ -33,13 +33,13 @@ int main(int argc, char** argv) {
 
   std::cout << std::endl;
   std::cout << "Combining ";
-  std::cout << termcolor::bright_magenta << "cli_widget::symbol_spinner" << termcolor::reset;
+  std::cout << termcolor::bright_magenta << "cli_widget::symbol_cycler" << termcolor::reset;
   std::cout << " and ";
   std::cout << termcolor::cyan << "cli_widget::spin_loader" << termcolor::reset;
   std::cout << std::endl;
 
   // Combining two widgets
-  cli_widgets::symbol_spinner spinner_inbuilt2(cli_widgets::spinner_symbols::symbols_bars_horizontal);
+  cli_widgets::symbol_cycler spinner_inbuilt2(cli_widgets::spinner_symbols::symbols_angles);
   cli_widgets::spin_loader loader(std::cout);
   loader.launch();
 
