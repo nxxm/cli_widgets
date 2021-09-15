@@ -148,8 +148,7 @@ namespace cli_widgets {
       }
 
       // clear the line as it was prior to writing the done message
-      // the +1 takes into account the expansion of the action string above
-      _out << "\r" << std::string(start_icon.size() + begin.size() + end.size() + action.size() + size + 1, ' ');
+      _out << "\r\e[K" << std::flush;
 
       // write the stop_message
       _out << "\r" << wstring_to_utf8(start_icon) << stop_message << std::endl;
