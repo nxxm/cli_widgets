@@ -8,6 +8,8 @@
 #include <unistd.h>
 #endif
 
+
+
 namespace cli_widgets {
 
   inline void set_stdin_echo(bool enable) {
@@ -39,13 +41,13 @@ namespace cli_widgets {
 
 
   /**
-   * \brief stdin_hide_guard makes sure that the std::cin is not displayed in the console 
+   * \brief hidden_input_guard makes sure that the std::cin is not displayed in the console 
    * This can be useful in some cases like typing a password
    * At the end of the scope std::cin returns to its original state 
    */
   
-  struct stdin_hide_guard {
-    stdin_hide_guard(bool enable = true) { set_stdin_echo(enable); }
-    ~stdin_hide_guard() { set_stdin_echo(false); }
+  struct hidden_input_guard {
+    hidden_input_guard(bool enable = true) { set_stdin_echo(enable); }
+    ~hidden_input_guard() { set_stdin_echo(false); }
   };
 }

@@ -16,19 +16,19 @@ loader.stop();
 
 See [spin\_loader.cpp](./examples/spin_loader.cpp) for more example.
 
-## [`cli_widgets::stdin_hide_guard`](./cli_widgets/stdin_hide_guard.hpp)
+## [`cli_widgets::hidden_input_guard`](./cli_widgets/hidden_input_guard.hpp)
 
 ```cpp
 std::string passphrase;
 std::cout << "Please enter your password : ";
 
 {
-  cli_widgets::stdin_hide_guard hide_password{};
+  cli_widgets::hidden_input_guard hide_password{};
   std::cin >> passphrase;
 }
 ```
 
-See [stdin\_hide_guard.cpp](./examples/stdin_hide_guard.cpp) for more example.
+See [stdin\_hide_guard.cpp](./examples/hidden_input_guard.cpp) for more example.
 
 ## License
 [MIT License](./LICENSE).
