@@ -1,5 +1,5 @@
 { 
   "boostorg/predef" : { "@" : "master" },
   "ikalnitsky/termcolor" : { "@" : "master" },
-  "platform" : ["Boost::thread", "Boost::system", "Boost::filesystem"]
+  "platform" : ["Boost::system", "Boost::filesystem"]
 }
