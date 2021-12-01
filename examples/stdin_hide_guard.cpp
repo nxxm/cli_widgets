@@ -6,7 +6,6 @@
 #include <cli_widgets/hidden_input_guard.hpp>
 
 int main(int argc, const char *argv[]) {
-if (!(argc == 1)){
   std::string passphrase;
   std::cout << "Please enter your password : " << std::endl;
   {
@@ -14,6 +13,6 @@ if (!(argc == 1)){
   passphrase = disable_display.ask_for_passphrase();
   }
   std::cout << passphrase << std::endl;
-}
+
   return 0;
 }

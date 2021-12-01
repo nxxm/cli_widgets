@@ -11,12 +11,7 @@
  BOOST_AUTO_TEST_CASE(passphrase_test) {
   namespace bp = boost::process;
   namespace fs = boost::filesystem;
-
-  bp::opstream in;
-  bp::ipstream out;
-  bp::pipe p;
-  std::vector<std::string> outline;
-  std::string value;
+  
   std::string path_to_exe;
 
   fs::path current_path = fs::absolute(fs::current_path());
@@ -26,28 +21,26 @@
     }
   }
 
-  std::vector<std::string> many_password = {"Un p@ssw0rd balnéaire à Zürich ?"};
+  std::vector<std::string> many_password = {"Un p@ssw0rd balnéaire à Zürich ?"
+                                            ,"canal&descent(copper+slip)simplicity"
+                                            ,"ownership&ease%by)scent*just"
+                                            ,"now_meanwhileöclimb<duty/effect"
+                                            ,"picture-complication_grow everlasting&beam"};
 
   for (auto password : many_password){
-    bp::child c(path_to_exe,"automatic",bp::std_out > out, bp::std_in < in);
-
+    bp::opstream in;
+    bp::ipstream out;
+    std::string value="";
+    
+    bp::child c(path_to_exe,bp::std_out > out, bp::std_in < in);
+    bool  is_password = false;
     while (c.running() && std::getline(out, value) && !value.empty()) {
       in << password << std::endl;
-      outline.push_back(value);
-    }
-
-    c.wait();
-    c.terminate();
-    int found_pass = 0;
-    std::string output_password;
-    std::string begin_from_password = password.substr(0,3);
-    for (auto read : outline) {
-      if (boost::algorithm::starts_with(read, begin_from_password)) {
-
-        output_password = read;
+      if (boost::algorithm::contains(value,password)){
+        is_password = true;
       }
     }
-
-    BOOST_REQUIRE(boost::algorithm::contains(output_password,password));
+    BOOST_REQUIRE(is_password);
+    c.wait();
   }
 }
