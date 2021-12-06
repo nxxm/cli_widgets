@@ -32,22 +32,14 @@
     
     bp::child ask_passphrase_child(path_to_exe,bp::std_out > out, bp::std_in < in);
     bool  is_the_right_password = false;
-    bool is_password_not_display = false;
     while (ask_passphrase_child.running() && std::getline(out, value) && !value.empty()) {
-      in << password;
-
-      if (value!=password){
-        is_password_not_display = true;
-      }
-
-      in << std::endl;
+      in << password <<std::endl;
       if (value==password){
         is_the_right_password = true;
         break;
       }
     }
 
-    BOOST_REQUIRE(is_password_not_display);
     BOOST_REQUIRE(is_the_right_password);
     ask_passphrase_child.wait();
   }
