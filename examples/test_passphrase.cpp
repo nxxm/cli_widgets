@@ -13,13 +13,11 @@
   namespace fs = boost::filesystem;
   
   std::string path_to_exe;
-
-  fs::path current_path = fs::absolute(fs::current_path());
-  for (fs::directory_entry &entry : fs::recursive_directory_iterator{current_path}) {
-    if (entry.path().filename().string() == "stdin_hide_guard" ||entry.path().filename().string() == "stdin_hide_guard.exe" ) {
-      path_to_exe = entry.path().string();
-    }
-  }
+#if BOOST_OS_WINDOWS
+  path_to_exe ="./stdin_hide_guard.exe"
+#else
+  path_to_exe ="./stdin_hide_guard";
+#endif
 
   std::vector<std::string> many_password = {"Un p@ssw0rd balnéaire à Zürich ?"
                                             ,"canal&descent(copper+slip)simplicity"
@@ -32,15 +30,25 @@
     bp::ipstream out;
     std::string value="";
     
-    bp::child c(path_to_exe,bp::std_out > out, bp::std_in < in);
-    bool  is_password = false;
-    while (c.running() && std::getline(out, value) && !value.empty()) {
-      in << password << std::endl;
-      if (boost::algorithm::contains(value,password)){
-        is_password = true;
+    bp::child ask_passphrase_child(path_to_exe,bp::std_out > out, bp::std_in < in);
+    bool  is_the_right_password = false;
+    bool is_password_not_display = false;
+    while (ask_passphrase_child.running() && std::getline(out, value) && !value.empty()) {
+      in << password;
+
+      if (value!=password){
+        is_password_not_display = true;
+      }
+
+      in << std::endl;
+      if (value==password){
+        is_the_right_password = true;
+        break;
       }
     }
-    BOOST_REQUIRE(is_password);
-    c.wait();
+
+    BOOST_REQUIRE(is_password_not_display);
+    BOOST_REQUIRE(is_the_right_password);
+    ask_passphrase_child.wait();
   }
 }

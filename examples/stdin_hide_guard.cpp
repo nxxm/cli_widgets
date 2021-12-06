@@ -10,7 +10,7 @@ int main(int argc, const char *argv[]) {
   std::cout << "Please enter your password : " << std::endl;
   {
   cli_widgets::hidden_input_guard disable_display{};
-  passphrase = disable_display.ask_for_passphrase();
+  passphrase = disable_display.ask_something_to_user();
   }
   std::cout << passphrase << std::endl;
 

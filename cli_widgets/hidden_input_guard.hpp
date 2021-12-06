@@ -49,10 +49,10 @@ namespace cli_widgets {
   struct hidden_input_guard {
     hidden_input_guard(bool enable = true) { set_stdin_echo(enable); }
 
-    inline std::string ask_for_passphrase(){ 
-      std::string passphrase="";
-      std::getline(std::cin, passphrase);
-      return passphrase;
+    inline std::string ask_something_to_user (){ 
+      std::string string_from_user="";
+      std::getline(std::cin, string_from_user);
+      return string_from_user;
     }
 
     ~hidden_input_guard() { set_stdin_echo(false); }
