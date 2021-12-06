@@ -1,0 +1,5 @@
+{ 
+  "boostorg/predef" : { "@" : "boost-1.73.0" },
+  "ikalnitsky/termcolor" : { "@" : "v2.0.0" },
+  "platform" : ["Boost::system", "Boost::filesystem"]
+}

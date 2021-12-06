@@ -1,4 +1,0 @@
-{ 
-  "boostorg/predef" : { "@" : "master" },
-  "ikalnitsky/termcolor" : { "@" : "master" }
-}
