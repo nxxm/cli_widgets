@@ -14,7 +14,7 @@
   
   std::string path_to_exe;
 #if BOOST_OS_WINDOWS
-  path_to_exe ="./stdin_hide_guard.exe"
+  path_to_exe ="./stdin_hide_guard.exe";
 #else
   path_to_exe ="./stdin_hide_guard";
 #endif
