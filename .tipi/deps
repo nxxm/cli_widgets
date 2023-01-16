@@ -1,4 +1,9 @@
 { 
   "ikalnitsky/termcolor" : { "@" : "v2.0.0" },
-  "platform" : ["Boost::system", "Boost::filesystem"]
+  "tipi-deps/boost" : {
+    "@" : "v1.80.0-without-submodules"
+    , "u" : true
+    , "packages" : ["boost_system", "boost_filesystem"]
+    , "targets" : ["Boost::system", "Boost::filesystem"]
+  }
 }
