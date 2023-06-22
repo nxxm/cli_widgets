@@ -1,4 +1,9 @@
 { 
   "ikalnitsky/termcolor" : { "@" : "v2.0.0" },
-  "platform" : ["Boost::system", "Boost::filesystem"]
+  "boostorg/boost" : { "@" : "boost-1.80.0",
+    "opts": "set(BOOST_INCLUDE_LIBRARIES system filesystem uuid)",
+    "packages": [ "boost_system", "boost_filesystem", "boost_uuid" ],
+    "targets": [ "Boost::system", "Boost::filesystem", "Boost::uuid" ],
+    "u": true
+  } 
 }
